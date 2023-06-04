@@ -1,0 +1,3 @@
+[submodule "src/trlx"]
+	path = src/trlx
+	url = https://github.com/CarperAI/trlx.git
