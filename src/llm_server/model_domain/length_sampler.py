@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class LengthSampler:
     """
     Samples a length

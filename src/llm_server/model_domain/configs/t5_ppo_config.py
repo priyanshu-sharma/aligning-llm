@@ -1,17 +1,17 @@
 from trlx.data.configs import (ModelConfig, OptimizerConfig, SchedulerConfig,
                                TokenizerConfig, TrainConfig, TRLConfig)
-from trlx.models.modeling_ilql import ILQLConfig
+from trlx.models.modeling_ppo import PPOConfig
 
-t5_ilql_config = TRLConfig(
+t5_ppo_config = TRLConfig(
     train=TrainConfig(
         seq_length=128,
         epochs=100,
-        total_steps=1000,
-        batch_size=32,
-        checkpoint_interval=1000,
+        total_steps=100000,
+        batch_size=12,
+        checkpoint_interval=10000,
         eval_interval=100,
         pipeline="PromptPipeline",
-        trainer="AccelerateILQLTrainer",
+        trainer="AcceleratePPOTrainer",
         save_best=False,
     ),
     model=ModelConfig(
@@ -40,16 +40,29 @@ t5_ilql_config = TRLConfig(
             "eta_min": 5.0e-5,
         },
     ),
-    method=ILQLConfig(
-        name="ILQLConfig",
-        tau=0.7,
+    method=PPOConfig(
+        name="PPOConfig",
+        num_rollouts=128,
+        chunk_size=12,
+        ppo_epochs=4,
+        init_kl_coef=0.05,
+        target=6,
+        horizon=10000,
         gamma=0.99,
-        cql_scale=0.1,
-        awac_scale=1,
-        alpha=0.001,
-        beta=0,
-        steps_for_target_q_sync=5,
-        two_qs=True,
-        gen_kwargs=dict(max_new_tokens=56, top_k=20, beta=4, temperature=1.0),
+        lam=0.95,
+        cliprange=0.2,
+        cliprange_value=0.2,
+        vf_coef=1,
+        scale_reward=None,
+        ref_mean=None,
+        ref_std=None,
+        cliprange_reward=10,
+        gen_kwargs={
+            "max_new_tokens": 50,
+            "do_sample": True,
+            "top_k": 0,
+            "top_p": 1,
+            "eos_token_id": -1,
+        },
     ),
 )

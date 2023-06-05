@@ -1,27 +1,12 @@
-import os
-
-import numpy as np
+import wandb
 from datasets import load_dataset
-from transformers import AutoTokenizer, pipeline
+from model_domain import (LengthSampler, build_imdb_dataset_test,
+                          get_positive_score, metric_fn_for_ilql,
+                          t5_ilql_config)
+from transformers import AutoTokenizer
 
 import trlx
-from trlx.data.configs import (
-    ModelConfig,
-    OptimizerConfig,
-    SchedulerConfig,
-    TokenizerConfig,
-    TrainConfig,
-    TRLConfig,
-)
-from model_domain import (
-    get_positive_score, 
-    t5_ilql_config, 
-    LengthSampler,
-    metric_fn,
-    build_imdb_dataset_test
-)
 
-import wandb
 wandb.init(project="Aligning-LLM")
 
 def t5_ilql_learning():
@@ -35,7 +20,7 @@ def t5_ilql_learning():
         samples=prompts,
         rewards=rewards,
         eval_prompts=val_prompts,
-        metric_fn=metric_fn,
+        metric_fn=metric_fn_for_ilql,
         config=config,
     )
 
