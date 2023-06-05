@@ -1,11 +1,9 @@
 import wandb
-from model_domain import (LengthSampler, build_imdb_dataset_test,
+from model_domain import (build_imdb_dataset_test,
                           build_imdb_dataset_train, get_positive_score,
                           metric_fn_for_ppo, t5_ppo_config)
 from transformers import AutoTokenizer
-
 import trlx
-
 wandb.init(project="Aligning-LLM")
 
 def t5_ppo_learning():
