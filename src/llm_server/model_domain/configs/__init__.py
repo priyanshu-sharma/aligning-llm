@@ -3,3 +3,4 @@ from model_domain.configs.t5_ppo_config import t5_ppo_config
 from model_domain.configs.gpt_ilql_config import gpt_ilql_config
 from model_domain.configs.gpt_ppo_config import gpt_ppo_config
 from model_domain.configs.llama_ppo_config import llama_ppo_config
+from model_domain.configs.llama_ilql_config import llama_ilql_config

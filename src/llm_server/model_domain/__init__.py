@@ -5,6 +5,7 @@ from model_domain.configs import (
     gpt_ilql_config,
     gpt_ppo_config,
     llama_ppo_config,
+    llama_ilql_config,
 )
 from model_domain.dataset import (
     build_imdb_dataset_test,
