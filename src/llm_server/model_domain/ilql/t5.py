@@ -178,3 +178,5 @@ def t5_ilql_learning():
         metric_fn=metric_fn,
         config=config,
     )
+
+t5_ilql_learning()
