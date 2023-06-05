@@ -140,7 +140,6 @@
 #     main()
 
 import os
-from typing import Dict, List
 
 import numpy as np
 from datasets import load_dataset

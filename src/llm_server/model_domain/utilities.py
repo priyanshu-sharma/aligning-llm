@@ -1,4 +1,5 @@
 import os
+from typing import Dict, List
 from transformers import pipeline
 
 sentiment_fn = pipeline(
