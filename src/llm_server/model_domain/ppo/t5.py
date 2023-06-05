@@ -12,7 +12,6 @@ def t5_ppo_learning():
     dataset = build_imdb_dataset_train(tokenizer)
     prompts = dataset["query"]
     test_dataset = build_imdb_dataset_test(tokenizer)
-
     val_prompts = test_dataset["query"][0:100]
 
     trlx.train(
