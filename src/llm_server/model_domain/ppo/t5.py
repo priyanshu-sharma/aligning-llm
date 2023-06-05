@@ -194,8 +194,11 @@ def t5_ppo_learning():
     config = t5_ppo_config
     tokenizer = AutoTokenizer.from_pretrained("lvwerra/t5-imdb")
     dataset = build_imdb_dataset_train(tokenizer)
+    dataset.set_format(type="torch")
     prompts = dataset["query"]
-    val_prompts = build_imdb_dataset_test(tokenizer)["query"][0:100]
+    test_dataset = build_imdb_dataset_test(tokenizer)
+    test_dataset.set_format(type="torch")
+    val_prompts = test_dataset["query"][0:100]
 
     trlx.train(
         prompts=prompts,
