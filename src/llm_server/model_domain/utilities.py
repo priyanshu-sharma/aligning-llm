@@ -4,12 +4,12 @@ from typing import Dict, List
 from transformers import pipeline
 
 sentiment_fn = pipeline(
-        "sentiment-analysis",
-        "lvwerra/distilbert-imdb",
-        top_k=2,
-        truncation=True,
-        batch_size=256,
-        device=0 if int(os.environ.get("LOCAL_RANK", 0)) == 0 else -1,
+    "sentiment-analysis",
+    "lvwerra/distilbert-imdb",
+    top_k=2,
+    truncation=True,
+    batch_size=256,
+    device=0 if int(os.environ.get("LOCAL_RANK", 0)) == 0 else -1,
 )
 
 def get_positive_score(scores):
@@ -20,6 +20,6 @@ def metric_fn_for_ilql(samples: List[str], **kwargs) -> Dict[str, List[float]]:
     sentiments = list(map(get_positive_score, sentiment_fn(samples)))
     return dict(sentiments=sentiments)
 
-def metric_fn_for_ppo(samples: List[str], **kwargs) -> Dict[str, List[float]]:
+def metric_fn_for_ppo(samples: List[str], **kwargs) -> List[float]:
     sentiments = list(map(get_positive_score, sentiment_fn(samples)))
     return sentiments
