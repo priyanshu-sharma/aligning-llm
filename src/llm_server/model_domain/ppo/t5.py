@@ -113,9 +113,9 @@
 # def t5_ppo_learning():
 #     config = TRLConfig.update(default_config, hparams)
 
-    def metric_fn(samples: List[str], **kwargs) -> Dict[str, List[float]]:
-        sentiments = list(map(get_positive_score, sentiment_fn(samples)))
-        return sentiments
+    # def metric_fn(samples: List[str], **kwargs) -> Dict[str, List[float]]:
+    #     sentiments = list(map(get_positive_score, sentiment_fn(samples)))
+    #     return sentiments
 
 #     sentiment_fn = pipeline(
 #         "sentiment-analysis",
