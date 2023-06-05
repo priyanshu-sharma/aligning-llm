@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer
 from datasets import load_dataset
-
-
+from model_domain import LengthSampler
 
 def tokenize(sample):
     sample["review"] = sample["review"].replace("/>br", "")
