@@ -42,3 +42,7 @@ pip install -e .
 
 ## Results
 
+
+## Issues
+
+1. ILQL Method for Llama Model is not working as it is currently not supported by trlx library. (src/model/ilql/llama.py)
