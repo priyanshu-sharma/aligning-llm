@@ -1,11 +1,5 @@
-from trlx.data.configs import (
-    ModelConfig,
-    OptimizerConfig,
-    SchedulerConfig,
-    TokenizerConfig,
-    TrainConfig,
-    TRLConfig,
-)
+from trlx.data.configs import (ModelConfig, OptimizerConfig, SchedulerConfig,
+                               TokenizerConfig, TrainConfig, TRLConfig)
 from trlx.models.modeling_ilql import ILQLConfig
 
 t5_ilql_config = TRLConfig(

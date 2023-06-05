@@ -1,14 +1,11 @@
-import trlx
 import wandb
 from datasets import load_dataset
+from model_domain import (LengthSampler, build_imdb_dataset_test,
+                          get_positive_score, metric_fn_for_ilql,
+                          t5_ilql_config)
 from transformers import AutoTokenizer
-from model_domain import (
-    get_positive_score, 
-    t5_ilql_config, 
-    LengthSampler,
-    metric_fn_for_ilql,
-    build_imdb_dataset_test
-)
+
+import trlx
 
 wandb.init(project="Aligning-LLM")
 

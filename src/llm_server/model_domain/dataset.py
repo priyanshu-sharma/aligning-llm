@@ -1,6 +1,7 @@
-from transformers import AutoTokenizer
 from datasets import load_dataset
 from model_domain import LengthSampler
+from transformers import AutoTokenizer
+
 
 def build_imdb_dataset_train(tokenizer, input_min_text_length=2, input_max_text_length=8):
     dataset = load_dataset("imdb", split="train")

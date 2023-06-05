@@ -1,11 +1,5 @@
-from trlx.data.configs import (
-    ModelConfig,
-    OptimizerConfig,
-    SchedulerConfig,
-    TokenizerConfig,
-    TrainConfig,
-    TRLConfig,
-)
+from trlx.data.configs import (ModelConfig, OptimizerConfig, SchedulerConfig,
+                               TokenizerConfig, TrainConfig, TRLConfig)
 from trlx.models.modeling_ppo import PPOConfig
 
 t5_ppo_config = TRLConfig(
