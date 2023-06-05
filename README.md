@@ -29,6 +29,7 @@ Source - https://dev.to/jjokah/submodules-a-git-repo-inside-a-git-repo-36l9
 
 ```
 conda create -n env_aligning_llm python=3.10
+pip install -r requirements.txt
 ```
 
 4. Overall uses Python 3.10.10 and install other dependencies

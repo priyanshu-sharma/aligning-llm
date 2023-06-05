@@ -4,6 +4,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
+src/llm_server/model_domain/ilql/bert.py
+src/llm_server/model_domain/ilql/llama.py
+src/llm_server/model_domain/ppo/
 
 # C extensions
 *.so
