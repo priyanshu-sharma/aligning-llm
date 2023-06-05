@@ -113,9 +113,9 @@
 # def t5_ppo_learning():
 #     config = TRLConfig.update(default_config, hparams)
 
-#     def metric_fn(samples: List[str], **kwargs) -> Dict[str, List[float]]:
-#         sentiments = list(map(get_positive_score, sentiment_fn(samples)))
-#         return sentiments
+    def metric_fn(samples: List[str], **kwargs) -> Dict[str, List[float]]:
+        sentiments = list(map(get_positive_score, sentiment_fn(samples)))
+        return sentiments
 
 #     sentiment_fn = pipeline(
 #         "sentiment-analysis",
@@ -177,15 +177,14 @@
 # t5_ppo_learning()
 import trlx
 import wandb
-from datasets import load_dataset
 from transformers import AutoTokenizer
 from model_domain import (
     get_positive_score, 
     t5_ppo_config, 
     LengthSampler,
     metric_fn,
-    # build_imdb_dataset_train,
-    # build_imdb_dataset_test
+    build_imdb_dataset_train,
+    build_imdb_dataset_test
 )
 
 wandb.init(project="Aligning-LLM")
@@ -193,54 +192,17 @@ wandb.init(project="Aligning-LLM")
 def t5_ppo_learning():
     config = t5_ppo_config
     tokenizer = AutoTokenizer.from_pretrained("lvwerra/t5-imdb")
-    # dataset = build_imdb_dataset_train(tokenizer)
-    # dataset = dataset.set_format(type="torch")
-    def build_imdb_dataset_train(tokenizer, input_min_text_length=2, input_max_text_length=8):
-        # load imdb with datasets
-        ds = load_dataset("imdb", split="train")
-        ds = ds.rename_columns({"text": "review"})
-        ds = ds.filter(lambda x: len(x["review"]) > 200, batched=False)
-
-        input_size = LengthSampler(input_min_text_length, input_max_text_length)
-
-        def tokenize(sample):
-            sample["review"] = sample["review"].replace("/>br", "")
-            sample["input_ids"] = tokenizer.encode(sample["review"])[: input_size()] + [tokenizer.eos_token_id]
-            sample["query"] = tokenizer.decode(sample["input_ids"])
-            return sample
-
-        ds = ds.map(tokenize, batched=False)
-        ds.set_format(type="torch")
-        return ds
-
-    def build_imdb_dataset_test(tokenizer, input_min_text_length=2, input_max_text_length=8):
-        # load imdb with datasets
-        ds = load_dataset("imdb", split="test")
-        ds = ds.rename_columns({"text": "review"})
-        ds = ds.filter(lambda x: len(x["review"]) > 200, batched=False)
-
-        input_size = LengthSampler(input_min_text_length, input_max_text_length)
-
-        def tokenize(sample):
-            sample["review"] = sample["review"].replace("/>br", "")
-            sample["input_ids"] = tokenizer.encode(sample["review"])[: input_size()] + [tokenizer.eos_token_id]
-            sample["query"] = tokenizer.decode(sample["input_ids"])
-            return sample
-
-        ds = ds.map(tokenize, batched=False)
-        ds.set_format(type="torch")
-        return ds
-
     dataset = build_imdb_dataset_train(tokenizer)
+    dataset = dataset.set_format(type="torch")
     prompts = dataset["query"]
     test_dataset = build_imdb_dataset_test(tokenizer)
-    # test_dataset = test_dataset.set_format(type="torch")
+    test_dataset = test_dataset.set_format(type="torch")
     val_prompts = test_dataset["query"][0:100]
 
     trlx.train(
         prompts=prompts,
         eval_prompts=val_prompts,
-        reward_fn=metric_fn,
+        reward_fn=metric_fn['sentiments'],
         config=config,
     )
 
