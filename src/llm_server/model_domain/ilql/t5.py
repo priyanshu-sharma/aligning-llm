@@ -1,18 +1,7 @@
-import os
-
-import numpy as np
-from datasets import load_dataset
-from transformers import AutoTokenizer, pipeline
-
 import trlx
-from trlx.data.configs import (
-    ModelConfig,
-    OptimizerConfig,
-    SchedulerConfig,
-    TokenizerConfig,
-    TrainConfig,
-    TRLConfig,
-)
+import wandb
+from datasets import load_dataset
+from transformers import AutoTokenizer
 from model_domain import (
     get_positive_score, 
     t5_ilql_config, 
@@ -21,7 +10,6 @@ from model_domain import (
     build_imdb_dataset_test
 )
 
-import wandb
 wandb.init(project="Aligning-LLM")
 
 def t5_ilql_learning():
