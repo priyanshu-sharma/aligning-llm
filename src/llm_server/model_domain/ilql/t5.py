@@ -6,7 +6,7 @@ from model_domain import (
     get_positive_score, 
     t5_ilql_config, 
     LengthSampler,
-    metric_fn,
+    metric_fn_for_ilql,
     build_imdb_dataset_test
 )
 
@@ -23,7 +23,7 @@ def t5_ilql_learning():
         samples=prompts,
         rewards=rewards,
         eval_prompts=val_prompts,
-        metric_fn=metric_fn,
+        metric_fn=metric_fn_for_ilql,
         config=config,
     )
 

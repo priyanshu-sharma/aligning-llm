@@ -182,7 +182,7 @@ from model_domain import (
     get_positive_score, 
     t5_ppo_config, 
     LengthSampler,
-    metric_fn,
+    metric_fn_for_ppo,
     build_imdb_dataset_train,
     build_imdb_dataset_test
 )
@@ -202,7 +202,7 @@ def t5_ppo_learning():
     trlx.train(
         prompts=prompts,
         eval_prompts=val_prompts,
-        reward_fn=metric_fn['sentiments'],
+        reward_fn=metric_fn_for_ppo,
         config=config,
     )
 

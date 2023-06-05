@@ -15,6 +15,10 @@ def get_positive_score(scores):
     "Extract value associated with a positive sentiment from pipeline's output"
     return dict(map(lambda x: tuple(x.values()), scores))["POSITIVE"]
 
-def metric_fn(samples: List[str], **kwargs) -> Dict[str, List[float]]:
+def metric_fn_for_ilql(samples: List[str], **kwargs) -> Dict[str, List[float]]:
     sentiments = list(map(get_positive_score, sentiment_fn(samples)))
     return dict(sentiments=sentiments)
+
+def metric_fn_for_ppo(samples: List[str], **kwargs) -> Dict[str, List[float]]:
+    sentiments = list(map(get_positive_score, sentiment_fn(samples)))
+    return sentiments
