@@ -1,15 +1,18 @@
 import wandb
 from datasets import load_dataset
-from model_domain import (build_imdb_dataset_test,
-                          get_positive_score, metric_fn_for_ilql,
-                          t5_ilql_config)
-from transformers import AutoTokenizer
 import trlx
+from transformers import AutoTokenizer
+from model_domain import (
+    sentiment_fn,
+    metric_fn_for_ilql,
+    gpt_ilql_config,
+    build_imdb_dataset_test
+)
 wandb.init(project="Aligning-LLM")
 
-def t5_ilql_learning():
-    config = t5_ilql_config
-    tokenizer = AutoTokenizer.from_pretrained("lvwerra/t5-imdb")
+def gpt_ilql_learning():
+    config = gpt_ilql_config
+    tokenizer = AutoTokenizer.from_pretrained("gpt2")
     dataset = load_dataset("imdb", split="train")
     prompts = dataset["text"]
     rewards = dataset["label"]
@@ -22,4 +25,4 @@ def t5_ilql_learning():
         config=config,
     )
 
-t5_ilql_learning()
+gpt_ilql_learning()
