@@ -6,6 +6,7 @@ from trlx.data.configs import (
     TrainConfig,
     TRLConfig,
 )
+from trlx.models.modeling_ilql import ILQLConfig
 
 t5_ilql_config = TRLConfig(
     train=TrainConfig(

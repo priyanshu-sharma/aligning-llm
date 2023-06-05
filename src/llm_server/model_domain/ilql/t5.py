@@ -154,7 +154,6 @@ from trlx.data.configs import (
     TrainConfig,
     TRLConfig,
 )
-from trlx.models.modeling_ilql import ILQLConfig
 from model_domain import (
     get_positive_score, 
     t5_ilql_config, 
