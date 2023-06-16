@@ -1,6 +1,11 @@
-# Aligning-LLM
+# Aligning-LLM with Human Perception
 
 Official Repo for Reinforcement Learning Project (Aligning LLM with Human Preception)
+
+
+Priyanshu Sharma
+
+862395994
 
 ## Submodule Details
 
@@ -42,6 +47,19 @@ pip install -e .
 
 ## Results
 
+Other training related graphs and results are also available at - https://drive.google.com/drive/folders/1oIeO_jX9p2YDfOo9P2vj-W8ECId-hAf0?usp=sharing
+
+### PPO
+
+T5 PPO - https://wandb.ai/pshar053/Aligning-LLM/reports/Weave-samples-23-06-16-12-24-54---Vmlldzo0NjY2MzI1
+GPT PPO - https://wandb.ai/pshar053/Aligning-LLM/reports/Weave-samples-23-06-16-12-57-22---Vmlldzo0NjY2NDYx
+Llama PPO - https://wandb.ai/pshar053/Aligning-LLM/reports/Weave-samples-23-06-16-12-57-53---Vmlldzo0NjY2NDYz
+
+### ILQL
+
+T5 ILQL - https://wandb.ai/pshar053/Aligning-LLM/reports/Weave-samples-23-06-16-13-01-20---Vmlldzo0NjY2NDgy
+GPT ILQL - https://wandb.ai/pshar053/Aligning-LLM/reports/Weave-samples-23-06-16-13-00-25---Vmlldzo0NjY2NDc5
+Llama ILQL - Not Currently Supported by trlx library
 
 ## Issues
 
